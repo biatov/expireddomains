@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = 'expireddomains.spiders'
 #USER_AGENT = 'expireddomains (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -54,7 +54,7 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
         'scrapy.downloadermiddleware.useragent.UserAgentMiddleware': None,
-        'parse_project.comm.rotate_useragent.RotateUserAgentMiddleware': 400
+        'expireddomains.comm.rotate_useragent.RotateUserAgentMiddleware': 400
 }
 #DOWNLOADER_MIDDLEWARES = {
 #    'expireddomains.middlewares.MyCustomDownloaderMiddleware': 543,

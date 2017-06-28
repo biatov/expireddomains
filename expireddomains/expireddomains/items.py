@@ -8,7 +8,5 @@
 import scrapy
 
 
-class ExpireddomainsItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class GetUrlDelDomItem(scrapy.Item):
+    url_del_dom = scrapy.Field()

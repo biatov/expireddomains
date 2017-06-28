@@ -13,5 +13,5 @@ class RotateUserAgentMiddleware(UserAgentMiddleware):
         if ua:
             request.headers.setdefault('User-Agent', ua)
 
-    user_agent_list = open('parse_project/comm/useragents.txt').read().split('\n')
+    user_agent_list = open('expireddomains/comm/useragents.txt').read().split('\n')
     UA = random.choice(user_agent_list)
