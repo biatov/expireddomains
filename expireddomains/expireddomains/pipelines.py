@@ -17,6 +17,6 @@ class ExpireddomainsPipeline(object):
     #     self.file.close()
     #
     # def process_item(self, item, spider):
-    #     line = str(item['url_del_dom']) + "\n"
+    #     line = str(item['domain']) + "\n"
     #     self.file.write(line)
     #     return item

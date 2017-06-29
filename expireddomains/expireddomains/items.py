@@ -10,3 +10,7 @@ import scrapy
 
 class GetUrlDelDomItem(scrapy.Item):
     title_href = scrapy.Field()
+
+
+class GetDomainsItem(scrapy.Item):
+    domain = scrapy.Field()
