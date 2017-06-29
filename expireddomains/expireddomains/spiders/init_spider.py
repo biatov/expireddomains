@@ -1,7 +1,8 @@
 from scrapy import FormRequest
-import scrapy
 from ..items import GetUrlDelDomItem
 from scrapy.spiders import CrawlSpider
+import re
+from itertools import groupby
 
 
 class GetUrlDelDomSpider(CrawlSpider):
@@ -23,5 +24,11 @@ class GetUrlDelDomSpider(CrawlSpider):
         item = GetUrlDelDomItem()
         if b'The supplied login information are unknown.' not in response.body:
             for each in response.selector.css('ul[id*="navlistexpireddomains"]'):
-                item['url_del_dom'] = each.xpath('li/a/text()').extract()
-                return item
+                text_link = each.xpath('.//a').extract()
+                item['title_del_dom'] = list(filter(None, map(
+                    lambda i: i if re.search(r'\((\d+,*)+\)', i) and not re.search('Archive', i) else '', text_link)))
+                href = each.xpath('.//a/@href').extract()
+                url_del_dom = list(
+                    filter(None, map(lambda x: x if re.search('expired[a-zA-Z]+(\d{4,6})*/$', x) else '', href)))
+                item['url_del_dom'] = [el for el, _ in groupby(url_del_dom)]
+        return item

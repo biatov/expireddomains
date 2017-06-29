@@ -71,6 +71,9 @@ DOWNLOADER_MIDDLEWARES = {
 #ITEM_PIPELINES = {
 #    'expireddomains.pipelines.SomePipeline': 300,
 #}
+ITEM_PIPELINES = {
+    'expireddomains.pipelines.ExpireddomainsPipeline': 800,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
