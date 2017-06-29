@@ -9,5 +9,4 @@ import scrapy
 
 
 class GetUrlDelDomItem(scrapy.Item):
-    title_del_dom = scrapy.Field()
-    url_del_dom = scrapy.Field()
+    title_href = scrapy.Field()
