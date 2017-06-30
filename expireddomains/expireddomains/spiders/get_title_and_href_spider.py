@@ -34,5 +34,6 @@ class GetUrlDelDomSpider(CrawlSpider):
                                                     title_del_dom)))
                 href = list(
                     map(lambda el: '%s%s' % (response.url[:-1], el.split('href="')[1].split('"')[0]), url_del_dom))
-                item['title_href'] = list(zip(title, href))
+                # item['title_href'] = list(zip(title, href))
+                item['title_href'] = href
             return item

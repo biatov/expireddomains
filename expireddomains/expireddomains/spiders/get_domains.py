@@ -2,8 +2,10 @@ from scrapy import FormRequest
 from scrapy import Request
 
 from ..items import GetDomainsItem
-from scrapy.spiders import CrawlSpider
+from scrapy.spiders import CrawlSpider, Rule
+from scrapy.linkextractors import LinkExtractor
 import re
+import json
 
 
 class GetUrlDelDomSpider(CrawlSpider):
@@ -11,11 +13,27 @@ class GetUrlDelDomSpider(CrawlSpider):
 
     allowed_domains = ["expireddomains.net"]
 
-    start_urls = list(map(lambda p: 'https://member.expireddomains.net/domains/expiredcom201612/?start=%s' % p, [0, 25]))
+    try:
+        with open('title_and_href.json') as f:
+            urls = json.load(f)[0]['title_href']
+    except FileNotFoundError:
+            urls = list()
+
+    start_urls = list(map(lambda link: '%s?start=0' % link, urls))
+    # start_urls = ['https://member.expireddomains.net/domains/expiredcom201706/?start=0']
+    # def start_requests(self):
+    #     for url in self.start_urls:
+    #         yield Request(url, self.parse, dont_filter=True)
+
+    rules = (
+        Rule(LinkExtractor(allow=r'\?start=\d+'), callback='parse_numeric_pages', follow=True),
+    )
 
     def start_requests(self):
-        for url in self.start_urls:
-            yield Request(url, self.parse, dont_filter=True)
+        requests = []
+        for start_url in self.start_urls:
+            requests.append(Request(url=start_url, headers={'Referer': 'https://member.expireddomains.net/'}, dont_filter=True))
+        return requests
 
     def parse(self, response):
         yield FormRequest.from_response(response,
