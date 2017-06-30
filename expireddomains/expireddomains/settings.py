@@ -14,6 +14,7 @@ BOT_NAME = 'expireddomains'
 SPIDER_MODULES = ['expireddomains.spiders']
 NEWSPIDER_MODULE = 'expireddomains.spiders'
 
+# DUPEFILTER_DEBUG = True
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'expireddomains (+http://www.yourdomain.com)'
@@ -56,6 +57,7 @@ DOWNLOADER_MIDDLEWARES = {
         'scrapy.downloadermiddleware.useragent.UserAgentMiddleware': None,
         'expireddomains.comm.rotate_useragent.RotateUserAgentMiddleware': 400
 }
+
 #DOWNLOADER_MIDDLEWARES = {
 #    'expireddomains.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
