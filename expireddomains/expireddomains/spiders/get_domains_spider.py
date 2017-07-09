@@ -3,6 +3,7 @@ from scrapy import Selector
 from ..items import GetDomainsItem
 from scrapy.spiders import CrawlSpider
 from selenium import webdriver
+from pyvirtualdisplay import Display
 
 
 class GetUrlDelDomSpider(CrawlSpider):
@@ -10,11 +11,14 @@ class GetUrlDelDomSpider(CrawlSpider):
 
     allowed_domains = ["member.expireddomains.net"]
 
-    domain = input('Enter search region: ')
-    start_urls = ['https://member.expireddomains.net/domains/expired%s/' % domain]
+    region = input('Enter region: ').strip()
+
+    start_urls = ['https://member.expireddomains.net/domains/expired%s/' % region]
 
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
+        self.display = Display(visible=0, size=(1024, 768))
+        self.display.start()
         self.driver = webdriver.Firefox()
 
     def parse(self, response):
@@ -41,3 +45,4 @@ class GetUrlDelDomSpider(CrawlSpider):
                 except:
                     break
         self.driver.close()
+        self.display.stop()
