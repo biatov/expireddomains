@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = 'expireddomains.spiders'
 # DUPEFILTER_DEBUG = True
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'expireddomains (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 6.1; ru; rv:1.9.2b5) Gecko/20091204 Firefox/3.6b5'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -54,10 +54,6 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-        'scrapy.downloadermiddleware.useragent.UserAgentMiddleware': None,
-        'expireddomains.comm.rotate_useragent.RotateUserAgentMiddleware': 400
-}
 
 #DOWNLOADER_MIDDLEWARES = {
 #    'expireddomains.middlewares.MyCustomDownloaderMiddleware': 543,
