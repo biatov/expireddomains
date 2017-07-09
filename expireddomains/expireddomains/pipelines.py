@@ -13,7 +13,7 @@ class ExpireddomainsPipeline(object):
     def open_spider(self, spider):
         self.region = GetUrlDelDomSpider.start_urls[0].split('/expired')[1].split('/')[0]
         self.date = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
-        self.file = open('%s_domains_%s.txt' % (self.region, self.date), 'w')
+        self.file = open('../%s_domains_%s.txt' % (self.region, self.date), 'w')
 
     def close_spider(self, spider):
         self.file.close()
